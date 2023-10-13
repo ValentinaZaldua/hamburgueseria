@@ -6,9 +6,11 @@ import Hamburgueseria.Persistencia.Archivo;
 
 public class Hamburgueseria {
 	private  ArrayList<TipoProducto> tipoProductos;
+	private ArrayList<Factura> facturas;
 	
 	public Hamburgueseria() {
 		this.tipoProductos = new ArrayList<TipoProducto>();
+		this.facturas = new ArrayList<Factura>();
 	}
 	
 
@@ -65,6 +67,9 @@ public class Hamburgueseria {
 			}
 		}
 		return null;
+	}
+	
+	public void ingresarFactura(int )
 	}
 
 }
