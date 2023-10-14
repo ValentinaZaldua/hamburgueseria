@@ -1,16 +1,19 @@
 package Hamburgueseria.Logic;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import Hamburgueseria.Persistencia.Archivo;
 
 public class Hamburgueseria {
 	private  ArrayList<TipoProducto> tipoProductos;
 	private ArrayList<Factura> facturas;
+	private ArrayList<Añadidos> añadidos;
 	
 	public Hamburgueseria() {
 		this.tipoProductos = new ArrayList<TipoProducto>();
 		this.facturas = new ArrayList<Factura>();
+		this.añadidos = new ArrayList<Añadidos>();
 	}
 	
 
@@ -68,8 +71,13 @@ public class Hamburgueseria {
 		}
 		return null;
 	}
+	//para la factura, pero no se como continuarlo, tambien falta añadir añadidos pues si el cliente solicita una porcion de x ingrediente 
+	//o algun tipo de complemento, para eso va a ser esa clase, tambien falta la clase combos para armar los combos y por ultimo unir
+	//cada clase a hambugueseria y llevarlo a principal para la visualizacion
 	
-	public void ingresarFactura(int )
+	//de todos modos no se que tan efectivo sea el uso de esa clase añadidos
+	public void ingresarFactura(Date fecha ) {
+		
 	}
 
 }
