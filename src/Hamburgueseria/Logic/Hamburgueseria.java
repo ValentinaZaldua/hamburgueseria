@@ -71,13 +71,41 @@ public class Hamburgueseria {
 		}
 		return null;
 	}
-	//para la factura, pero no se como continuarlo, tambien falta añadir añadidos pues si el cliente solicita una porcion de x ingrediente 
-	//o algun tipo de complemento, para eso va a ser esa clase, tambien falta la clase combos para armar los combos y por ultimo unir
-	//cada clase a hambugueseria y llevarlo a principal para la visualizacion
 	
-	//de todos modos no se que tan efectivo sea el uso de esa clase añadidos
-	public void ingresarFactura(Date fecha ) {
-		
+	private TipoProducto buscarTipoProducto(int id_tipo_producto) {
+		for (TipoProducto tipoProducto : this.tipoProductos) {
+			if(tipoProducto.getId_tipo_producto() == id_tipo_producto) {
+				return tipoProducto;
+			}
+		}
+		return null;
+	}
+	
+	public void ingresarFactura(Date fecha, ArrayList<int[]> productosComprados) {
+		int numero = this.facturas.size() + 1;
+		Factura factura = new Factura(numero, fecha);
+		for(int[] datos : productosComprados) {
+			Producto producto = this.buscarProducto(datos[0]);
+			factura.adicionarProducto(producto, datos[1]);
+		}
+		factura.calcularTotal();
+		this.facturas.add(factura);
+	}
+	
+	public void imprimirFactura() {
+		for(Factura factura : this.facturas) {
+			System.out.println("----HAMNURGUESERIA SAS----\n");;
+			System.out.println("---Factura # " +  factura.getNumero() + "---\n");
+			System.out.println("---Fecha # " +  factura.getFecha() + "---\n");
+			System.out.println("Productos: \n");	
+			
+			for(FacturaProducto facturaProducto : factura.getFacturaProductos()) {
+				System.out.println("***" + facturaProducto.getProducto().getNombre() + " *** Cantidad: " + facturaProducto.getCantidad() + " *** Precio unidad:  " + facturaProducto.getPrecio());
+			}
+			
+			System.out.println("---------------------------------\n");
+			System.out.println("Total a pagar: " + factura.getValorTotal());
+		}		
 	}
 
 }
