@@ -95,8 +95,10 @@ public class Principal {
 			} while (otroProducto == 1);
 			if(productosComprados.size() > 0) {
 				this.hamburgueseria.ingresarFactura(fechaActual, productosComprados);
-			}
-		}		
+			}else if(opcion == 2) {
+			sc.close();
+		}
+		} 
 	}
 
 }

@@ -9,11 +9,13 @@ public class Hamburgueseria {
 	private  ArrayList<TipoProducto> tipoProductos;
 	private ArrayList<Factura> facturas;
 	private ArrayList<Añadidos> añadidos;
+	private ArrayList<Combos> combos;
 	
 	public Hamburgueseria() {
 		this.tipoProductos = new ArrayList<TipoProducto>();
 		this.facturas = new ArrayList<Factura>();
 		this.añadidos = new ArrayList<Añadidos>();
+		this.combos = new ArrayList<Combos>();
 	}
 	
 
@@ -92,6 +94,7 @@ public class Hamburgueseria {
 		this.facturas.add(factura);
 	}
 	
+
 	public void imprimirFactura() {
 		for(Factura factura : this.facturas) {
 			System.out.println("----HAMNURGUESERIA SAS----\n");;
