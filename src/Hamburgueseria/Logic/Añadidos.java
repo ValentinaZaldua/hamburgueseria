@@ -37,6 +37,11 @@ public class Añadidos {
 	public void setPrecio_añadido(int precio_añadido) {
 		this.precio_añadido = precio_añadido;
 	}
+
+	public void add(Añadidos añadidos) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

@@ -55,9 +55,23 @@ public class Hamburgueseria {
 			String datos[] = linea.split(";");
 			this.ingresarProducto(Integer.parseInt(datos[3]), Integer.parseInt(datos[0]), datos[1], Integer.parseInt(datos[2]));
 		}
+		
+		lineas =Archivo.leerArchivo("Añadidos.dat");
+		for (String linea : lineas) {
+			String datos[] = linea.split(";");
+			this.ingresarAñadidos(Integer.parseInt(datos[0]), datos[1], Integer.parseInt(datos[2]));
+		}
 	}
 
 	
+	private void ingresarAñadidos(int id_añadido, String nombre_añadido, int precio_añadido) {
+		Producto Producto = this.buscarProducto(id_añadido);
+		if(Producto != null) {
+			Producto.ingresarAñadidos(id_añadido, nombre_añadido, precio_añadido);
+		}			
+	}
+
+
 	private void ingresarProducto(int id_tipo_producto, int id_producto, String nombre, int precio) {
 		TipoProducto tipoProducto = this.buscarTipoProducto(id_tipo_producto);
 		if(tipoProducto != null) {
@@ -65,10 +79,12 @@ public class Hamburgueseria {
 		}
 	}
 	
-	private TipoProducto buscarTipoProducto(int id_tipo_producto) {
-		for (TipoProducto tipoProducto : this.tipoProductos) {
-			if(tipoProducto.getId_tipo_producto() == id_tipo_producto) {
-				return tipoProducto;
+	private Producto buscarProducto(int idProducto) {
+		for(TipoProducto tipoProducto : this.tipoProductos) {
+			for(Producto producto : tipoProducto.getProductos()) {
+				if(producto.getId_producto() == idProducto) {
+					return producto;
+				}
 			}
 		}
 		return null;
@@ -82,6 +98,16 @@ public class Hamburgueseria {
 		}
 		return null;
 	}
+	
+	private Añadidos buscarAñadidos(int id_añadidos) {
+		for (Añadidos añadidos : this.añadidos) {
+			if(añadidos.getId_añadido() == id_añadidos) {
+				return añadidos;
+			}
+		}
+		return null;
+	}
+	
 	
 	public void ingresarFactura(Date fecha, ArrayList<int[]> productosComprados) {
 		int numero = this.facturas.size() + 1;
@@ -94,6 +120,9 @@ public class Hamburgueseria {
 		this.facturas.add(factura);
 	}
 	
+
+	
+
 
 	public void imprimirFactura() {
 		for(Factura factura : this.facturas) {
@@ -109,6 +138,12 @@ public class Hamburgueseria {
 			System.out.println("---------------------------------\n");
 			System.out.println("Total a pagar: " + factura.getValorTotal());
 		}		
+	}
+
+
+	public void mostrarListaCombos(boolean leerArchivo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

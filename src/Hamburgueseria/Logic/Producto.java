@@ -11,11 +11,13 @@ public class Producto {
 	private int id_producto;
 	private String nombre;
 	private int precio;
+	private ArrayList<Añadidos> añadidos;
 
 	public Producto(int id_producto, String nombre, int precio) {
 		this.id_producto = id_producto;
 		this.nombre = nombre;
 		this.precio = precio;
+		this.añadidos = new ArrayList<Añadidos>();;
 	}
 
 	public int getId_producto() {
@@ -42,6 +44,19 @@ public class Producto {
 		this.precio = precio;
 	}
 
+	
 
+	public ArrayList<Añadidos> getAñadidos() {
+		return añadidos;
+	}
+
+	public void setAñadidos(ArrayList<Añadidos> añadidos) {
+		this.añadidos = añadidos;
+	}
+
+	public void ingresarAñadidos(int id_añadido, String nombre_añadido, int precio_añadido) {
+		Añadidos añadidos = new Añadidos(id_añadido, nombre_añadido, precio_añadido);
+		this.añadidos.add(añadidos);
+	}
 	
 }

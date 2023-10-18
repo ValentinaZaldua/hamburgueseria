@@ -10,10 +10,12 @@ public class Principal {
 
 	private Hamburgueseria hamburgueseria;
 	private ArrayList<int[]> productosComprados;
+	private ArrayList<int[]> combosComprados;
 	
 	public Principal() {
 		this.hamburgueseria = new Hamburgueseria();
 		this.productosComprados =  new ArrayList<int[]>(); 
+		this.combosComprados = new ArrayList<int[]>();
 	}
 	
 	public static void main(String[] args) {
@@ -30,7 +32,7 @@ public class Principal {
 		do {
 			String texto = "Digite una opcion: \n";
 			texto += "0. Salir \n";
-			texto += "1. Comprar productos \n";
+			texto += "1. Hacer pedido \n";
 			texto += "2. Imprimir factura \n";
 			System.out.println(texto);
 			opcion = sc.nextInt();
@@ -79,10 +81,13 @@ public class Principal {
 				System.out.println("Por favor indiquue el codigo del producto a comprar\n");
 				int codProducto = sc.nextInt();
 				System.out.println("Por favor indiquue la cantidad del producto a comprar\n");
-				int cantProducto = sc.nextInt();				
+				int cantProducto = sc.nextInt();	
+				//System.out.println("¿Desea agregar algun ingrediente a su compra?\n");
+				//int aggIngrediente = sc.nextInt();
 				
 				datos[0] = codProducto;
 				datos[1] = cantProducto;
+				//datos[2] = aggIngrediente;
 				
 				productosComprados.add(datos);	//se añade al arraylist el producto indicado para saber cual se quiere comprar
 				
@@ -98,6 +103,38 @@ public class Principal {
 			}else if(opcion == 2) {
 			sc.close();
 		}
+		} else if(opcion == 2) { //opcion combos
+			combosComprados = new ArrayList<int[]>();
+			hamburgueseria.mostrarListaCombos(true);
+			do {
+				int datos[] = new int[2];
+				hamburgueseria.mostrarListaCombos(false);
+				System.out.println("Por favor indiquue el codigo del combo a comprar\n");
+				int codCombo = sc.nextInt();
+				System.out.println("Por favor indique la cantidad del combo a comprar\n");
+				int cantCombo = sc.nextInt();	
+				//System.out.println("¿Desea agregar algun ingrediente a su combo?\n");
+				//int aggIngrediente = sc.nextInt();
+				
+				datos[0] = codCombo;
+				datos[1] = cantCombo;
+				//datos[2] = aggIngrediente;
+				
+				combosComprados.add(datos);	//se añade al arraylist el combo indicado para saber cual se quiere comprar
+				
+				System.out.println("Desea ingresar otro producto?\n"
+						+ "1. Si\n"
+						+ "2. No\n");
+
+				otroProducto = sc.nextInt();
+				
+			} while (otroProducto == 1);
+			if(combosComprados.size() > 0) {
+				this.hamburgueseria.ingresarFactura(fechaActual, combosComprados);
+			}else if(opcion == 2) {
+			sc.close();
+		}
+			
 		} 
 	}
 
