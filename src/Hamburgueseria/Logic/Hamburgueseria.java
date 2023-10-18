@@ -10,17 +10,19 @@ public class Hamburgueseria {
 	private ArrayList<Factura> facturas;
 	private ArrayList<Añadidos> añadidos;
 	private ArrayList<Combos> combos;
+	//private Producto producto;
 	
 	public Hamburgueseria() {
 		this.tipoProductos = new ArrayList<TipoProducto>();
 		this.facturas = new ArrayList<Factura>();
 		this.añadidos = new ArrayList<Añadidos>();
 		this.combos = new ArrayList<Combos>();
+		//this.producto = new Producto();
 	}
 	
 
-	public void mostrarListaProductos(Boolean leerArchvio) {
-		if(leerArchvio) {
+	public void mostrarListaProductos(Boolean leerArchivo) {
+		if(leerArchivo) {
 			leerArchivos();
 		}	
 		
@@ -36,6 +38,28 @@ public class Hamburgueseria {
 			}
 		}
 	}
+	
+	
+	public void mostrarListaCombos(boolean b) {
+	
+		
+		    
+		for (Combos combos : this.combos) {
+		    for (Combos combo : combos.getCombo()) {
+		    	System.out.println("\n");
+		        System.out.println("-------------------------------");
+		        System.out.println("Tipo Combo: " + combo.getNombre_combo());
+		        System.out.println("Codigo Combo: " + combo.getId_combo());
+		        System.out.println("Producto: " + combo.getNombre_combo());
+		        System.out.println("Precio Combo: " + combo.getPrecio_combo());	   
+		        }
+			}
+		}
+
+	
+
+	
+	
 	
 	private void ingresarTipoProducto(int id_tipo_producto, String nombre) {
 		TipoProducto tipoProducto = new TipoProducto(id_tipo_producto, nombre);
@@ -62,8 +86,25 @@ public class Hamburgueseria {
 			this.ingresarAñadidos(Integer.parseInt(datos[0]), datos[1], Integer.parseInt(datos[2]));
 		}
 	}
-
+		
+		private void leerArchivos2() {
+			ArrayList<String> lineas;
+		lineas =Archivo.leerArchivo2("Combos.dat");
+		for (String linea : lineas) {
+			String datos[] = linea.split(";");
+			this.ingresarCombos(Integer.parseInt(datos[0]), datos[1], Integer.parseInt(datos[2]));
+		}
+	}
 	
+	
+	private void ingresarCombos(int id_combo, String nombre_combo, int precio_combo) {
+		Combos Combos = this.buscarCombos(id_combo);
+		if(Combos != null) {
+			Combos.ingresarCombos(id_combo, nombre_combo, precio_combo);
+		}
+	}
+
+
 	private void ingresarAñadidos(int id_añadido, String nombre_añadido, int precio_añadido) {
 		Producto Producto = this.buscarProducto(id_añadido);
 		if(Producto != null) {
@@ -109,6 +150,16 @@ public class Hamburgueseria {
 	}
 	
 	
+	private Combos buscarCombos(int id_combos) {
+		for (Combos combos : this.combos) {
+			if(combos.getId_combo() == id_combos) {
+				return combos;
+			}
+		}
+		return null;
+	}
+	
+	
 	public void ingresarFactura(Date fecha, ArrayList<int[]> productosComprados) {
 		int numero = this.facturas.size() + 1;
 		Factura factura = new Factura(numero, fecha);
@@ -120,9 +171,6 @@ public class Hamburgueseria {
 		this.facturas.add(factura);
 	}
 	
-
-	
-
 
 	public void imprimirFactura() {
 		for(Factura factura : this.facturas) {
@@ -138,12 +186,6 @@ public class Hamburgueseria {
 			System.out.println("---------------------------------\n");
 			System.out.println("Total a pagar: " + factura.getValorTotal());
 		}		
-	}
-
-
-	public void mostrarListaCombos(boolean leerArchivo) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

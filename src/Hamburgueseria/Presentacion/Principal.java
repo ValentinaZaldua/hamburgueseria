@@ -57,7 +57,7 @@ public class Principal {
 	
 	private void menuProductos() {	
 		Scanner sc = new Scanner(System.in);
-		int opcion, agregar, otroProducto;
+		int opcion, agregar, otroProducto, aggIngredientes;
 		// Obtener la fecha actual
 		Date fechaActual = new Date();
 		// formato que se quiere la fecha
@@ -103,6 +103,22 @@ public class Principal {
 			}else if(opcion == 2) {
 			sc.close();
 		}
+			
+			System.out.println("¿Desea agregar algun ingrediente a su compra?\n"
+					+ "1. Si\n"
+					+ "2. No\n");
+			
+			aggIngredientes = sc.nextInt();
+			
+			while (aggIngredientes == 1);
+			if(productosComprados.size() > 0) {
+				this.hamburgueseria.ingresarFactura(fechaActual, productosComprados);
+			}else if (opcion ==2) {
+				sc.close();
+			}
+			
+			
+			
 		} else if(opcion == 2) { //opcion combos
 			combosComprados = new ArrayList<int[]>();
 			hamburgueseria.mostrarListaCombos(true);
